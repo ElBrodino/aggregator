@@ -12,6 +12,5 @@ func handlerLogin(s *state, cmd command) error {
 		return fmt.Errorf("error on setting user")
 	}
 
-	//fmt.Printf("User set: %s\n", s.config.CurrentUserName)
 	return nil
 }
