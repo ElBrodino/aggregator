@@ -12,25 +12,34 @@ import (
 )
 
 func main() {
-	dbURL := "postgres://postgres:postgres@localhost:5432/gator?sslmode=disable"
-	db, err := sql.Open("postgres", dbURL)
-	dbQueries := database.New(db)
-
 	cfg, err := config.Read()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	dbURL := cfg.DbURL // "postgres://postgres:postgres@localhost:5432/gator?sslmode=disable"
+	db, err := sql.Open("postgres", dbURL)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer db.Close()
+	db.Ping()
+
+	dbQueries := database.New(db)
 	appState := &state{
 		config: &cfg,
 		db:     dbQueries,
 	}
+
 	if err != nil {
 		log.Fatalf("error reading config: %v", err)
 	}
-
-	appState.config = &cfg
 
 	cmds := commands{
 		registeredCommands: make(map[string]func(*state, command) error),
 	}
 	cmds.register("login", handlerLogin)
+	cmds.register("register", handlerRegister)
 
 	// user input checks
 	if len(os.Args) < 2 {
