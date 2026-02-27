@@ -22,11 +22,11 @@ func TestParseCommand(t *testing.T) {
 			name:      "Valid command no args",
 			inputArgs: []string{"gator", "register"},
 			wantCmd:   command{Name: "register", Args: []string{}},
-			wantErr:   true,
+			wantErr:   false,
 		},
 		{
 			name:      "Missing command",
-			inputArgs: []string{"gator", "register"},
+			inputArgs: []string{"gator"},
 			wantCmd:   command{Name: "register", Args: []string{}},
 			wantErr:   true,
 		},
@@ -38,7 +38,7 @@ func TestParseCommand(t *testing.T) {
 
 			// check if we got an error when we expected one
 			if (err != nil) != tt.wantErr {
-				t.Errorf("parseCommand() error = %v, wantErr %v", got, tt.wantCmd)
+				t.Errorf("parseCommand() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 

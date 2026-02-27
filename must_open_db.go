@@ -2,17 +2,15 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"gator/internal/database"
+	"os"
 )
 
 func mustOpenDB(dbURL string) (*database.Queries, *sql.DB) {
-	db, err := sql.Open("postgres", dbURL)
+	dbQueries, db, err := openDB(dbURL)
 	if err != nil {
-		fmt.Println(err)
+		os.Exit(1)
 	}
-	defer db.Close()
-	db.Ping()
 
-	return database.New(db), db
+	return dbQueries, db
 }

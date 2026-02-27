@@ -2,13 +2,14 @@ package main
 
 import (
 	"gator/internal/config"
-	"log"
+	"os"
 )
 
 func mustReadConfig() config.Config {
-	cfg, err := config.Read()
+	cfg, err := readConfig()
 	if err != nil {
-		log.Fatalf("error reading config: %v", err)
+		os.Exit(1)
 	}
+
 	return cfg
 }
