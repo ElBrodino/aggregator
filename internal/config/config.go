@@ -19,18 +19,20 @@ func Read() (Config, error) {
 	if err != nil {
 		return Config{}, err
 	}
+	return readFromPath(path)
+}
 
+func readFromPath(path string) (Config, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return Config{}, err
 	}
 
-	cfg := Config{}
+	var cfg Config
 	err = json.Unmarshal(data, &cfg)
 	if err != nil {
 		return Config{}, err
 	}
-
 	return cfg, nil
 }
 
@@ -55,7 +57,10 @@ func write(cfg Config) error {
 	if err != nil {
 		return err
 	}
+	return writeToPath(path, cfg)
+}
 
+func writeToPath(path string, cfg Config) error {
 	file, err := os.Create(path)
 	if err != nil {
 		return err
@@ -67,6 +72,5 @@ func write(cfg Config) error {
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
