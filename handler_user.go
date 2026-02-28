@@ -12,5 +12,6 @@ func handlerLogin(s *state, cmd command) error {
 		return fmt.Errorf("error on setting user")
 	}
 
+	fmt.Println("User switched successfully!")
 	return nil
 }

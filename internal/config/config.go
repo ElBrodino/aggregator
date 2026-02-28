@@ -2,7 +2,6 @@ package config
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -38,7 +37,6 @@ func readFromPath(path string) (Config, error) {
 
 func (cfg *Config) SetUser(name string) error {
 	cfg.CurrentUserName = name
-	fmt.Printf("User set to: %s", name)
 	return write(*cfg)
 }
 
