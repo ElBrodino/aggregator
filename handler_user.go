@@ -7,7 +7,7 @@ func handlerLogin(s *state, cmd command) error {
 		return fmt.Errorf("Login should only have 1 argument")
 	}
 
-	err := s.config.SetUser(cmd.Args[0])
+	err := s.cfg.SetUser(cmd.Args[0])
 	if err != nil {
 		return fmt.Errorf("error on setting user")
 	}

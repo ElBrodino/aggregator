@@ -6,13 +6,13 @@ import (
 	"gator/internal/database"
 )
 
-func openDB(dbURL string) (*database.Queries, *sql.DB, error) {
+func openDB(dbURL string) (*database.Queries, error) {
 	db, err := sql.Open("postgres", dbURL)
 	if err != nil {
-		return database.New(db), db, errors.New("not enough arguments")
+		return database.New(db), errors.New("not enough arguments")
 	}
 	defer db.Close()
 	db.Ping()
 
-	return database.New(db), db, nil
+	return database.New(db), nil
 }

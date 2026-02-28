@@ -10,7 +10,7 @@ func handlerRegister(s *state, cmd command) error {
 	}
 	name := cmd.Args[0]
 
-	err := s.config.SetUser(name)
+	err := s.cfg.SetUser(name)
 	if err != nil {
 		return fmt.Errorf("error on setting user: %w", err)
 	}

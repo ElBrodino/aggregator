@@ -8,14 +8,13 @@ import (
 
 func main() {
 	cfg := mustReadConfig()
-	dbQueries, db := mustOpenDB(cfg.DBURL)
-	defer db.Close()
+	dbQueries := mustOpenDB(cfg.DBURL)
 	cmds := newCommands()
 	cmd := mustParseCommand(os.Args)
 
 	appState := &state{
-		config: &cfg,
-		db:     dbQueries,
+		cfg: &cfg,
+		db:  dbQueries,
 	}
 
 	mustRun(cmds, appState, cmd)
