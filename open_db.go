@@ -11,8 +11,8 @@ func openDB(dbURL string) (*database.Queries, error) {
 	if err != nil {
 		return database.New(db), errors.New("not enough arguments")
 	}
-	defer db.Close()
-	db.Ping()
+	//defer db.Close()
+	//db.Ping()
 
 	return database.New(db), nil
 }
