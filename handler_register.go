@@ -32,7 +32,7 @@ func handlerRegister(s *state, cmd command) error {
 		return fmt.Errorf("User '%s' has been created but not logged in: %w\n", name, err)
 	}
 
-	fmt.Println("User createdsuccessfully!")
+	fmt.Println("User created successfully!")
 	fmt.Printf("* ID:      %v\n", user.ID)
 	fmt.Printf("* Name:    %v\n", user.Name)
 	return nil
